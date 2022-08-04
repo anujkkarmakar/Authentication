@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //we are changing the intent of the current activity
-                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
+                startActivity(new Intent(MainActivity.this, MainActivity2.class));
             }
         });
 
@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //we are changing the current activity
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, MainActivity3.class));
+                //Toast.makeText(MainActivity.this, "Under Construction", Toast.LENGTH_SHORT).show();
             }
         });
     }
