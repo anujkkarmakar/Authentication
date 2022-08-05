@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+//Sign Up
+
 public class MainActivity2 extends AppCompatActivity {
 
     private EditText email, password;
@@ -48,7 +50,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(MainActivity2.this, "Congratulations!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity2.this, MainActivity.class));
+                    startActivity(new Intent(MainActivity2.this, Main5Activity.class));
                 }
                 else {
                     Toast.makeText(MainActivity2.this, "Please enter a valid email and password", Toast.LENGTH_SHORT).show();
