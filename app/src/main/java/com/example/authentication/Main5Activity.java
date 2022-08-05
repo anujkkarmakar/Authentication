@@ -16,8 +16,11 @@ public class Main5Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main5);
         Button button = findViewById(R.id.button3);
-        TextView textView = findViewById(R.id.textView3);
+        TextView textView, textView1;
+        textView = findViewById(R.id.textView3);
+        textView1 = findViewById(R.id.textView4);
         textView.setText("Thanks for Signing up. You can now continue to login");
+        textView1.setText("Please check your email to verify your registration");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
