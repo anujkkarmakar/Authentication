@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.google.firebase.internal.InternalTokenProvider;
 public class MainActivity3 extends AppCompatActivity {
     private EditText email, password;
     private FirebaseAuth auth;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
