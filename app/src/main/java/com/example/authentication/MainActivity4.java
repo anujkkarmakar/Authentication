@@ -13,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity4 extends AppCompatActivity {
 
+    private long timeBack;
+
     FirebaseAuth auth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +32,16 @@ public class MainActivity4 extends AppCompatActivity {
                 startActivity(new Intent(MainActivity4.this, MainActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - timeBack > 1000) {
+            Toast.makeText(this, "Press back again to exit...", Toast.LENGTH_SHORT).show();
+            timeBack = System.currentTimeMillis();
+            return;
+        }
+        getActivity().finish();
+        System.exit(0);
     }
 }

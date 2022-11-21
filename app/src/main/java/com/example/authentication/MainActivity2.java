@@ -54,6 +54,7 @@ public class MainActivity2 extends AppCompatActivity {
                     Toast.makeText(MainActivity2.this, "Congratulations!", Toast.LENGTH_SHORT).show();
 
                     FirebaseUser user = auth.getCurrentUser();
+                    assert user != null;
                     user.sendEmailVerification()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -61,6 +62,7 @@ public class MainActivity2 extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         //show nothing
                                         //because we show the message to the user on the next activity
+                                        //TODO: make the changes in the same activity. "Not" another activity
                                     }
                                 }
                             });
