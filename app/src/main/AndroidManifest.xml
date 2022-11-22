@@ -22,15 +22,13 @@
             android:exported="false"
             android:label="Welcome Activity" />
         <activity
-            android:name=".MainActivity3"
+            android:name=".LoginActivity"
             android:exported="false"
-            android:label="Login Activity"
-            android:parentActivityName=".MainActivity" />
+            android:label="Login Activity" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".SignUpActivity"
             android:exported="false"
-            android:label="Signup Activity"
-            android:parentActivityName=".MainActivity" />
+            android:label="Signup Activity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

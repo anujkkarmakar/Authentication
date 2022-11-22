@@ -16,14 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.internal.InternalTokenProvider;
 
 import java.util.Objects;
 
 //Sign In
 
-public class MainActivity3 extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private EditText email, password;
     private FirebaseAuth auth;
     ProgressBar progressBar;
@@ -31,16 +29,17 @@ public class MainActivity3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
         TextView textView = findViewById(R.id.textView100);
         email = findViewById(R.id.email100);
         password = findViewById(R.id.password100);
         TextView forgotPassword = findViewById(R.id.forgotPassword);
-        Button signup = findViewById(R.id.button100);
+        TextView signup = findViewById(R.id.textView6);
+        Button login = findViewById(R.id.button100);
 
         textView.setText("Welcome to Log In Activity");
-        signup.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mail = email.getText().toString();
@@ -57,6 +56,14 @@ public class MainActivity3 extends AppCompatActivity {
                 sendPasswordResetEmail(mail);
             }
         });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "Switching to Login Activity", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+        });
     }
 
     public void sendPasswordResetEmail(String mail) {
@@ -64,9 +71,9 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity3.this, "Password reset link has been sent! Please follow the instructions", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Password reset link has been sent! Please follow the instructions", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity3.this, "Password reset link could not be send. Please try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Password reset link could not be send. Please try again!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -78,14 +85,14 @@ public class MainActivity3 extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     if(Objects.requireNonNull(auth.getCurrentUser()).isEmailVerified()) {
-                        Toast.makeText(MainActivity3.this, "Congratulations!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity3.this, MainActivity4.class));
+                        Toast.makeText(LoginActivity.this, "Congratulations!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, MainActivity4.class));
                     }
                     else {
-                        Toast.makeText(MainActivity3.this, "Please first verify your email id", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Please first verify your email id", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(MainActivity3.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });

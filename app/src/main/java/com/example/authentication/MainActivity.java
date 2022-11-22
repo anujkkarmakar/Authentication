@@ -1,27 +1,19 @@
 package com.example.authentication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     public void onStart() {
         super.onStart();
@@ -47,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //we are changing the intent of the current activity
-                startActivity(new Intent(MainActivity.this, MainActivity2.class));
+                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
             }
         });
 
@@ -56,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //we are changing the current activity
-                startActivity(new Intent(MainActivity.this, MainActivity3.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 //Toast.makeText(MainActivity.this, "Under Construction", Toast.LENGTH_SHORT).show();
             }
         });

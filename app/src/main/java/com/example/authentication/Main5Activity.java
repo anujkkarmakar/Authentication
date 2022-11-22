@@ -25,7 +25,7 @@ public class Main5Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(Main5Activity.this, "Redirecting to login page", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Main5Activity.this, MainActivity3.class));
+                startActivity(new Intent(Main5Activity.this, LoginActivity.class));
             }
         });
     }

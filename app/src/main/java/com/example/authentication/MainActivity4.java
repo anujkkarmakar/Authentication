@@ -41,7 +41,6 @@ public class MainActivity4 extends AppCompatActivity {
             timeBack = System.currentTimeMillis();
             return;
         }
-        getActivity().finish();
-        System.exit(0);
+        super.onBackPressed();
     }
 }

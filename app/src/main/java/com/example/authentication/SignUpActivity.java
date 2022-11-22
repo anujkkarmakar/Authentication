@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 //Sign Up
 
-public class MainActivity2 extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private EditText email, password;
     private FirebaseAuth auth;
@@ -34,6 +33,7 @@ public class MainActivity2 extends AppCompatActivity {
         email = findViewById(R.id.email100);
         password = findViewById(R.id.password100);
         Button signup = findViewById(R.id.button100);
+        TextView login = findViewById(R.id.textView8);
 
         textView.setText("Welcome to Sign Up Activity");
         signup.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +44,13 @@ public class MainActivity2 extends AppCompatActivity {
                 regis(mail, pass);
             }
         });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+            }
+        });
     }
 
     public void regis(String mail, String pass) {
@@ -51,7 +58,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(MainActivity2.this, "Congratulations!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Congratulations!", Toast.LENGTH_SHORT).show();
 
                     FirebaseUser user = auth.getCurrentUser();
                     assert user != null;
@@ -66,10 +73,10 @@ public class MainActivity2 extends AppCompatActivity {
                                     }
                                 }
                             });
-                    startActivity(new Intent(MainActivity2.this, Main5Activity.class));
+                    startActivity(new Intent(SignUpActivity.this, Main5Activity.class));
                 }
                 else {
-                    Toast.makeText(MainActivity2.this, "Please enter a valid email and password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Please enter a valid email and password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
