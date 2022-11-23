@@ -4,34 +4,48 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 //Sign Up
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText email, password;
+    private EditText email, password, name;
     private FirebaseAuth auth;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signin);
+        setContentView(R.layout.activity_signup);
         auth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
         TextView textView = findViewById(R.id.textView100);
         email = findViewById(R.id.email100);
         password = findViewById(R.id.password100);
+        name = findViewById(R.id.name);
         Button signup = findViewById(R.id.button100);
         TextView login = findViewById(R.id.textView8);
 
@@ -39,9 +53,10 @@ public class SignUpActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String uname = name.getText().toString().trim();
                 String mail = email.getText().toString();
                 String pass = password.getText().toString();
-                regis(mail, pass);
+                regis(mail, pass, uname);
             }
         });
 
@@ -53,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void regis(String mail, String pass) {
+    public void regis(String mail, String pass, String name) {
         auth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -70,6 +85,20 @@ public class SignUpActivity extends AppCompatActivity {
                                         //show nothing
                                         //because we show the message to the user on the next activity
                                         //TODO: make the changes in the same activity. "Not" another activity
+                                        User user1 = new User(name, mail);
+                                        String userId = user.getUid();
+                                        DocumentReference myRef = firestore.collection("users").document(userId);
+                                        myRef.set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(SignUpActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(SignUpActivity.this, "Profile cannot be created", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                     }
                                 }
                             });

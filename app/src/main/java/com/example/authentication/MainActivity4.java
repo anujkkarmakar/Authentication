@@ -10,18 +10,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity4 extends AppCompatActivity {
 
     private long timeBack;
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser user = auth.getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
         TextView textView = findViewById(R.id.textView2);
-        textView.setText("Welcome to the app :)");
+        assert user != null;
+        String name = user.getDisplayName();
+        textView.setText(name);
         Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
