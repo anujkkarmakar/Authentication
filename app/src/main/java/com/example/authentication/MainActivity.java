@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){ //if the user is currently signed in, we go to the MainActivity4
+        if(currentUser != null){ //if the user is currently signed in, we go to the LandingPage
             Toast.makeText(this, "You are already signed in", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, MainActivity4.class));
+            startActivity(new Intent(MainActivity.this, LandingPage.class));
         }
     }
     @Override

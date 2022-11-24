@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     if(Objects.requireNonNull(auth.getCurrentUser()).isEmailVerified()) {
                         Toast.makeText(LoginActivity.this, "Congratulations!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity4.class));
+                        startActivity(new Intent(LoginActivity.this, LandingPage.class));
                     }
                     else {
                         Toast.makeText(LoginActivity.this, "Please first verify your email id", Toast.LENGTH_SHORT).show();
