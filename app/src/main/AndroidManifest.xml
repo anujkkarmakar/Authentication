@@ -24,10 +24,12 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false"
+            android:noHistory="true"
             android:label="Login Activity" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false"
+            android:noHistory="true"
             android:label="Signup Activity"/>
         <activity
             android:name=".MainActivity"
